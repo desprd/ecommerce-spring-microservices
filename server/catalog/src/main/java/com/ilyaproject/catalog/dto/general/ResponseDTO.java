@@ -1,4 +1,4 @@
-package com.ilyaproject.catalog.dto.read;
+package com.ilyaproject.catalog.dto.general;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
