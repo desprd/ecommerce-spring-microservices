@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
+
 @Entity
 @Getter @Setter @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +21,7 @@ public class Course extends BaseEntity {
 
     private String description;
 
-    private Double price;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
