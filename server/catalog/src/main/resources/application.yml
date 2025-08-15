@@ -4,7 +4,9 @@ spring:
   application:
     name: "catalog"
   datasource:
-    
+    url: "jdbc:postgresql://localhost:5432/catalogdb"
+    username: admin
+    password: admin
   jpa:
     show-sql: true
   sql:

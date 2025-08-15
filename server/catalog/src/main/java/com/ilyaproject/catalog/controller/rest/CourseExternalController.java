@@ -1,16 +1,17 @@
 package com.ilyaproject.catalog.controller.rest;
 
+import com.ilyaproject.catalog.constants.CourseConstants;
 import com.ilyaproject.catalog.dto.read.CourseFullDTO;
+import com.ilyaproject.catalog.dto.read.ResponseDTO;
+import com.ilyaproject.catalog.dto.write.CreateCourseDTO;
 import com.ilyaproject.catalog.service.impl.CourseServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +27,14 @@ public class CourseExternalController {
     public ResponseEntity<List<CourseFullDTO>> fetchAllCourses(){
         List<CourseFullDTO> courses = courseService.fetchAllCourses();
         return ResponseEntity.status(HttpStatus.OK).body(courses);
+    }
+
+    @PostMapping("/course/create")
+    public ResponseEntity<ResponseDTO> createCourse(@Valid @RequestBody CreateCourseDTO courseDTO){
+        courseService.createCourse(courseDTO);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new ResponseDTO(CourseConstants.STATUS_201, CourseConstants.MESSAGE_201));
     }
 
 
