@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "catalog"
+  datasource:
+    
+  jpa:
+    show-sql: true
+  sql:
+    init:
+      mode: always
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
