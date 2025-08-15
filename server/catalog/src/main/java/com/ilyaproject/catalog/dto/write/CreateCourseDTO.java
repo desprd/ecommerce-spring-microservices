@@ -10,19 +10,19 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class CreateCourseDTO {
-    @NotBlank
-    @Size(max = 100)
+    @NotBlank(message = "Name cannot be empty")
+    @Size(max = 100, message = "Name max size is 100")
     private String name;
 
-    @NotBlank
-    @Size(max = 100)
+    @NotBlank(message = "Description cannot be empty")
+    @Size(max = 100, message = "Description max size is 100")
     private String description;
 
-    @NotNull
+    @NotNull(message = "Price cannot be empty")
     @DecimalMin("0.00")
-    @Digits(integer = 12, fraction = 2)
+    @Digits(integer = 12, fraction = 2, message = "Price format is 12x.2x")
     private BigDecimal price;
 
-    @NotNull
+    @NotNull(message = "Author id cannot be empty")
     private Long authorId;
 }

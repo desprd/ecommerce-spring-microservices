@@ -9,8 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class UpdateAuthorDTO {
-    @Size(max = 100)
+    @Size(max = 100, message = "Name max size is 100")
     private String name;
-    @Size(max = 100)
+    @Size(max = 100, message = "About max size is 100")
     private String about;
 }

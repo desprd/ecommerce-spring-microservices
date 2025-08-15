@@ -10,14 +10,14 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class UpdateCourseDTO {
-    @Size(max = 100)
+    @Size(max = 100, message = "Name max size is 100")
     private String name;
 
-    @Size(max = 100)
+    @Size(max = 100, message = "Description max size is 100")
     private String description;
 
     @DecimalMin("0.00")
-    @Digits(integer = 12, fraction = 2)
+    @Digits(integer = 12, fraction = 2, message = "Price format is 12x.2x")
     private BigDecimal price;
 
     private Long authorId;

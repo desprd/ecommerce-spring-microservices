@@ -9,10 +9,10 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class CreateAuthorDTO {
-    @NotBlank
-    @Size(max = 100)
+    @NotBlank(message = "Name cannot be empty")
+    @Size(max = 100, message = "Name max size is 100")
     private String name;
-    @NotBlank
-    @Size(max = 100)
+    @NotBlank(message = "About cannot be empty")
+    @Size(max = 100, message = "About max size is 100")
     private String about;
 }
