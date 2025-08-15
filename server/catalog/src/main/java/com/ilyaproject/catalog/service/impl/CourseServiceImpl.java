@@ -39,7 +39,6 @@ public class CourseServiceImpl implements CourseService {
     public void createCourse(CreateCourseDTO courseDTO) {
         Optional<Author> author = authorRepository.findById(courseDTO.getAuthorId());
         if (author.isEmpty()){
-            //TODO exception handler
             throw new AuthorNotFoundException("Author with id " + courseDTO.getAuthorId() + " was not found");
         }
         Course course = CourseMapper.mapToCourse(courseDTO, author.get());

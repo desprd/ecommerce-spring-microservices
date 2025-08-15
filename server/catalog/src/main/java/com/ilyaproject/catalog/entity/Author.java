@@ -1,21 +1,17 @@
 package com.ilyaproject.catalog.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity
-@Getter
-@Setter
+@Entity @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Author {
+@Builder
+public class Author extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long authorId;

@@ -11,6 +11,7 @@ public class CourseMapper {
                 .builder()
                 .id(course.getCourseId())
                 .name(course.getName())
+                .price(course.getPrice())
                 .description(course.getDescription())
                 .author(AuthorMapper.mapToAuthorSummaryDTO(course.getAuthor()))
                 .build();
