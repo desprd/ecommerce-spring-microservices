@@ -21,6 +21,8 @@ public class Course extends BaseEntity {
 
     private BigDecimal price;
 
+    private Integer spotsLeft;
+
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;

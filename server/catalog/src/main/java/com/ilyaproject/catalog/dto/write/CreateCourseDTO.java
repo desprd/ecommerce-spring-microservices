@@ -23,6 +23,10 @@ public class CreateCourseDTO {
     @Digits(integer = 12, fraction = 2, message = "Price format is 12x.2x")
     private BigDecimal price;
 
+    @NotNull(message = "Number of spots cannot be null")
+    @Min(value = 0, message = "Number of spots cannot be less than 0")
+    private Integer spotsLeft;
+
     @NotNull(message = "Author id cannot be empty")
     private Long authorId;
 }

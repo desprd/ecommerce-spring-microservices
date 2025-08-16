@@ -19,5 +19,7 @@ public class CourseFullDTO {
 
     private BigDecimal price;
 
+    private Integer spotsLeft;
+
     private AuthorSummaryDTO author;
 }

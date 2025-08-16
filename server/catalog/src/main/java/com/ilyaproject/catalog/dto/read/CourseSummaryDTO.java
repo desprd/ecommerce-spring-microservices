@@ -18,4 +18,6 @@ public class CourseSummaryDTO {
     private String description;
 
     private BigDecimal price;
+
+    private Integer spotsLeft;
 }

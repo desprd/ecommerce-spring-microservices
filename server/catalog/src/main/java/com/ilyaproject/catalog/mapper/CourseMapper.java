@@ -13,6 +13,7 @@ public class CourseMapper {
                 .name(course.getName())
                 .price(course.getPrice())
                 .description(course.getDescription())
+                .spotsLeft(course.getSpotsLeft())
                 .author(AuthorMapper.mapToAuthorSummaryDTO(course.getAuthor()))
                 .build();
     }
@@ -23,6 +24,7 @@ public class CourseMapper {
                 .price(courseDTO.getPrice())
                 .name(courseDTO.getName())
                 .description(courseDTO.getDescription())
+                .spotsLeft(courseDTO.getSpotsLeft())
                 .author(author)
                 .build();
     }

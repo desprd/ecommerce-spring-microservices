@@ -20,5 +20,8 @@ public class UpdateCourseDTO {
     @Digits(integer = 12, fraction = 2, message = "Price format is 12x.2x")
     private BigDecimal price;
 
+    @Min(value = 0, message = "Number of spots cannot be less than 0")
+    private Integer spotsLeft;
+
     private Long authorId;
 }
