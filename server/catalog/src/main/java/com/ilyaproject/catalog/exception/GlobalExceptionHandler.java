@@ -46,7 +46,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponseDTO> generalExceptionHandler(AuthorNotFoundException exception,
+    public ResponseEntity<ErrorResponseDTO> generalExceptionHandler(Exception exception,
                                                                            WebRequest webRequest){
         ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
                 webRequest.getDescription(false),

@@ -11,6 +11,9 @@ import com.ilyaproject.catalog.repository.CourseRepository;
 import com.ilyaproject.catalog.service.CourseService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ public class CourseServiceImpl implements CourseService {
     private final AuthorRepository authorRepository;
 
     @Override
+    @Cacheable(value = "coursesCache", sync = true)
     public List<CourseFullDTO> fetchAllCourses() {
         List<Course> courses = courseRepository.findAll();
         List<CourseFullDTO> coursesDTO = new ArrayList<>();
@@ -36,6 +40,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "coursesCache", allEntries = true)
     public void createCourse(CreateCourseDTO courseDTO) {
         Optional<Author> author = authorRepository.findById(courseDTO.getAuthorId());
         if (author.isEmpty()){
