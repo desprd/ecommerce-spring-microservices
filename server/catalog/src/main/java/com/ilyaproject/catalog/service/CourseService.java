@@ -9,4 +9,5 @@ import java.util.List;
 public interface CourseService {
     List<CourseFullDTO> fetchAllCourses();
     void createCourse(CreateCourseDTO courseDTO);
+    Boolean reserveCourse(Long courseId);
 }
