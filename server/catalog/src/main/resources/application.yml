@@ -17,6 +17,9 @@ spring:
     port: 6379
   cache:
     type: redis
+  grpc:
+    server:
+      port: 9090
 management:
   endpoints:
     web:

@@ -7,7 +7,7 @@ option java_outer_classname = "OrderProto";
 package payment;
 
 service OrderService {
-  rpc OrderPayment (OrderRequest) returns (OrderResponse) {}
+  rpc OrderValidation (OrderRequest) returns (OrderResponse) {}
 }
 
 message OrderRequest {
@@ -16,5 +16,5 @@ message OrderRequest {
 }
 
 message OrderResponse {
-  int64 orderId = 1;
+  bool isValid = 1;
 }
