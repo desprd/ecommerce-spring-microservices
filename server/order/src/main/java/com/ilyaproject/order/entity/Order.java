@@ -7,6 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "orders")
 public class Order extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +18,6 @@ public class Order extends BaseEntity{
     private Long customerId;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private Status status = Status.PENDING;
 }

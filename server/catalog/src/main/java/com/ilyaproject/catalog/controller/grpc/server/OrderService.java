@@ -3,6 +3,7 @@ package com.ilyaproject.catalog.controller.grpc.server;
 import com.ilyaproject.api.OrderRequest;
 import com.ilyaproject.api.OrderResponse;
 import com.ilyaproject.api.OrderServiceGrpc;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import org.springframework.grpc.server.service.GrpcService;
 

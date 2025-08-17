@@ -3,8 +3,10 @@ package com.ilyaproject.order.controller.grpc.client;
 import com.ilyaproject.api.OrderRequest;
 import com.ilyaproject.api.OrderResponse;
 import com.ilyaproject.api.OrderServiceGrpc;
+import com.ilyaproject.order.exception.OrderValidationFailedException;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.grpc.client.ImportGrpcClients;
@@ -15,13 +17,6 @@ import org.springframework.stereotype.Service;
 public class OrderClient {
 
     private final OrderServiceGrpc.OrderServiceBlockingStub blockingStub;
-//    public OrderClient(){
-//        ManagedChannel channel = ManagedChannelBuilder
-//                .forTarget("cata  log")
-//                .usePlaintext()
-//                .build();
-//        this.blockingStub = OrderServiceGrpc.newBlockingStub(channel);
-//    }
 
     public boolean checkIfValidOrder(Long courseId, Long customerId){
         OrderRequest request = OrderRequest
@@ -29,7 +24,12 @@ public class OrderClient {
                 .setCourseId(courseId)
                 .setCustomerId(customerId)
                 .build();
-        OrderResponse response = blockingStub.orderValidation(request);
-        return response.getIsValid();
+        try {
+            OrderResponse response = blockingStub.orderValidation(request);
+            return response.getIsValid();
+        }catch (StatusRuntimeException e){
+            var status = e.getStatus();
+            throw new OrderValidationFailedException("Order validation failed with status " + status.getCode() + " and description: " + status.getDescription());
+        }
     }
 }
