@@ -1,6 +1,6 @@
-package com.ilyaproject.catalog.exception;
+package com.ilyaproject.payment.exception;
 
-import com.ilyaproject.catalog.dto.general.ErrorResponseDTO;
+import com.ilyaproject.payment.dto.general.ErrorResponseDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -33,34 +33,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(validationErrors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(AuthorNotFoundException.class)
-    public ResponseEntity<ErrorResponseDTO> authorNotFoundExceptionHandler(AuthorNotFoundException exception,
-                                                                           WebRequest webRequest){
+
+    @ExceptionHandler(WrongPaymentAmountException.class)
+    public ResponseEntity<ErrorResponseDTO> wrongPaymentAmountExceptionHandler(WrongPaymentAmountException exception,
+                                                                    WebRequest webRequest){
         ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
                 webRequest.getDescription(false),
-                HttpStatus.NOT_FOUND,
+                HttpStatus.INTERNAL_SERVER_ERROR,
                 exception.getMessage(),
                 Instant.now()
         );
-        return new ResponseEntity<>(errorResponseDTO, HttpStatus.NOT_FOUND);
-    }
-
-
-    @ExceptionHandler(CourseNotFoundException.class)
-    public ResponseEntity<ErrorResponseDTO> courseNotFoundExceptionHandler(CourseNotFoundException exception,
-                                                                           WebRequest webRequest){
-        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
-                webRequest.getDescription(false),
-                HttpStatus.NOT_FOUND,
-                exception.getMessage(),
-                Instant.now()
-        );
-        return new ResponseEntity<>(errorResponseDTO, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> generalExceptionHandler(Exception exception,
-                                                                           WebRequest webRequest){
+                                                                    WebRequest webRequest){
         ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
                 webRequest.getDescription(false),
                 HttpStatus.INTERNAL_SERVER_ERROR,

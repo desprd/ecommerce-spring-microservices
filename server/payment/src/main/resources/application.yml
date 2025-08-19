@@ -1,0 +1,20 @@
+server:
+  port: ${SERVER_PORT:8070}
+spring:
+  application:
+    name: "payment"
+  grpc:
+    client:
+      channels:
+        catalog:
+          address: ${CATALOG_GRPC_ADDR:0.0.0.0:9090}
+          negotiationType: ${CATALOG_GRPC_NEGOTIATION:PLAINTEXT}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      probes:
+        enabled: true

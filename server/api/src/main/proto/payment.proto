@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ilyaproject.api";
+option java_outer_classname = "PaymentProto";
+
+package payment;
+
+service PaymentService {
+  rpc PaymentValidation (PaymentRequest) returns (PaymentResponse) {}
+}
+
+message PaymentRequest {
+  int64 courseId = 1;
+  int64 customerId = 2;
+  string price = 3;
+}
+
+message PaymentResponse {
+  bool isValid = 1;
+}
