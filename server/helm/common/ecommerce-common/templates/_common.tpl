@@ -39,6 +39,7 @@ spec:
                   key: {{ .Values.postgres.passwordSecret.key }}
 
             # === Redis ===
+            {{- if .Values.redis.enabled }}
             - name: SPRING_DATA_REDIS_HOST
               value: {{ .Values.redis.host | quote }}
             - name: SPRING_DATA_REDIS_PORT
@@ -48,7 +49,7 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.postgres.passwordSecret.name }}
                   key: {{ .Values.postgres.passwordSecret.key }}
-
+            {{- end }}
 
             # === gRPC ===
             {{- if .Values.grpc.enabled }}

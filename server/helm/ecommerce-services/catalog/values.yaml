@@ -33,6 +33,7 @@ postgres:
 
 
 redis:
+  enabled: true
   host: catalogcache-redis-master
   port: 6379
   passwordSecret:
