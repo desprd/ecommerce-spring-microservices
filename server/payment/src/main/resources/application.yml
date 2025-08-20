@@ -9,6 +9,8 @@ spring:
         order:
           address: ${ORDER_GRPC_ADDR:0.0.0.0:9091}
           negotiationType: ${ORDER_GRPC_NEGOTIATION:PLAINTEXT}
+  kafka:
+    bootstrap-servers: ${BOOTSTRAP-SERVERS-KAFKA:localhost:9094}
 management:
   endpoints:
     web:
