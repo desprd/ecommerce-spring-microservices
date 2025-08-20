@@ -22,6 +22,8 @@ spring:
           negotiationType: ${CATALOG_GRPC_NEGOTIATION:PLAINTEXT}
   kafka:
     bootstrap-servers: ${BOOTSTRAP-SERVERS-KAFKA:localhost:9094}
+    consumer:
+      group-id: order-group-id
 management:
   endpoints:
     web:
