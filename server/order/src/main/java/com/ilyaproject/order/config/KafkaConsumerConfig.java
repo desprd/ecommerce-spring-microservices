@@ -25,11 +25,14 @@ public class KafkaConsumerConfig {
     @Value("${spring.kafka.consumer.group-id}")
     private String groupId;
 
+    @Value("${app.kafka.trusted}")
+    private String trustedPackage;
+
     @Bean
     public ConsumerFactory<String, PaymentResultDTO> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         JsonDeserializer<PaymentResultDTO> deserializer = new JsonDeserializer<>(PaymentResultDTO.class);
-        deserializer.addTrustedPackages("com.ilyaproject.*");
+        deserializer.addTrustedPackages(trustedPackage);
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 bootstrapAddress);

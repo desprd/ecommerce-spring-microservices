@@ -23,7 +23,7 @@ spring:
   kafka:
     bootstrap-servers: ${BOOTSTRAP-SERVERS-KAFKA:localhost:9094}
     consumer:
-      group-id: order-group-id
+      group-id: ${GROUP-ID-KAFKA:order-group-id}
 management:
   endpoints:
     web:
@@ -33,4 +33,9 @@ management:
     health:
       probes:
         enabled: true
+app:
+  kafka:
+    topics:
+      payment-succeeded: ${TOPIC-PAYMENT-SUCCEEDED:payments.succeeded.v1}
+    trusted: ${KAFKA-TRUSTED-PACKAGE:com.ilyaproject.*}
 
