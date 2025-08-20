@@ -6,9 +6,9 @@ spring:
   grpc:
     client:
       channels:
-        catalog:
-          address: ${CATALOG_GRPC_ADDR:0.0.0.0:9090}
-          negotiationType: ${CATALOG_GRPC_NEGOTIATION:PLAINTEXT}
+        order:
+          address: ${ORDER_GRPC_ADDR:0.0.0.0:9091}
+          negotiationType: ${ORDER_GRPC_NEGOTIATION:PLAINTEXT}
 management:
   endpoints:
     web:

@@ -11,6 +11,8 @@ import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.grpc.server.service.GrpcService;
 
+import java.math.BigDecimal;
+
 @GrpcService
 @RequiredArgsConstructor
 public class OrderService extends OrderServiceGrpc.OrderServiceImplBase {
@@ -20,7 +22,7 @@ public class OrderService extends OrderServiceGrpc.OrderServiceImplBase {
     @Override
     public void orderValidation(OrderRequest request, StreamObserver<OrderResponse> responseObserver) {
         try {
-            if (courseService.reserveCourse(request.getCourseId())){
+            if (courseService.reserveCourse(request.getCourseId(), new BigDecimal(request.getPrice()))){
                 OrderResponse response = OrderResponse.newBuilder().setIsValid(true).build();
                 responseObserver.onNext(response);
             }else {
@@ -28,7 +30,7 @@ public class OrderService extends OrderServiceGrpc.OrderServiceImplBase {
                 responseObserver.onCompleted();
             }
         }catch (CourseNotFoundException e){
-            responseObserver.onError(Status.NOT_FOUND.withDescription("Course with id " + request.getCourseId() + " was not found").asRuntimeException());
+            responseObserver.onError(Status.NOT_FOUND.withDescription(e.getMessage()).asRuntimeException());
             responseObserver.onCompleted();
         }catch (Exception e){
             responseObserver.onError(Status.INTERNAL.withDescription("Reservation failed: " + e.getMessage()).asRuntimeException());

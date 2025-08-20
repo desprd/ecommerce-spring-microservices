@@ -12,17 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.grpc.client.ImportGrpcClients;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 @RequiredArgsConstructor
 public class OrderClient {
 
     private final OrderServiceGrpc.OrderServiceBlockingStub blockingStub;
 
-    public boolean checkIfValidOrder(Long courseId, Long customerId){
+    public boolean checkIfValidOrder(Long courseId, Long customerId, BigDecimal price){
         OrderRequest request = OrderRequest
                 .newBuilder()
                 .setCourseId(courseId)
                 .setCustomerId(customerId)
+                .setPrice(price.toPlainString())
                 .build();
         try {
             OrderResponse response = blockingStub.orderValidation(request);

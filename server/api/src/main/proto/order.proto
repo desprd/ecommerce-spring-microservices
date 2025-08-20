@@ -13,6 +13,7 @@ service OrderService {
 message OrderRequest {
   int64 courseId = 1;
   int64 customerId = 2;
+  string price = 3;
 }
 
 message OrderResponse {

@@ -3,6 +3,8 @@ package com.ilyaproject.order.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +18,8 @@ public class Order extends BaseEntity{
     private Long courseId;
 
     private Long customerId;
+
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default

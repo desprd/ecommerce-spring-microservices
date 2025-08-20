@@ -19,8 +19,8 @@ public class PaymentClient {
     public boolean checkPaymentDetails(Long courseId, Long customerId, BigDecimal price){
         PaymentRequest request = PaymentRequest
                 .newBuilder()
-                .setCustomerId(courseId)
-                .setCourseId(customerId)
+                .setCustomerId(customerId)
+                .setCourseId(courseId)
                 .setPrice(price.toPlainString())
                 .build();
         try {

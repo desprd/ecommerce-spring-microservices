@@ -4,6 +4,7 @@ import com.ilyaproject.order.controller.grpc.client.OrderClient;
 import com.ilyaproject.order.dto.write.CreateOrderDTO;
 import com.ilyaproject.order.entity.Order;
 import com.ilyaproject.order.exception.OrderAlreadyExistsException;
+import com.ilyaproject.order.exception.OrderWasNotFound;
 import com.ilyaproject.order.mapper.OrderMapper;
 import com.ilyaproject.order.repository.OrderRepository;
 import com.ilyaproject.order.service.OrderService;
@@ -11,6 +12,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -30,8 +32,16 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(OrderMapper.mapToOrder(orderDTO));
     }
 
+    @Override
+    public void isPaymentInformationValid(Long courseId, Long customerId, BigDecimal price) {
+        Optional<Order> order = orderRepository.findOrderByPaymentInformation(courseId, customerId, price);
+        if (order.isEmpty()){
+            throw new OrderWasNotFound(String.format("Order with course id %s, customer id %s and price %s was not found", courseId, customerId, price));
+        }
+    }
+
     private Boolean checkIfOrderIsValid(CreateOrderDTO orderDTO){
-        return orderClient.checkIfValidOrder(orderDTO.getCourseId(), orderDTO.getCustomerId());
+        return orderClient.checkIfValidOrder(orderDTO.getCourseId(), orderDTO.getCustomerId(), orderDTO.getPrice());
     }
 
     private Boolean checkIfOrderIsPresent(CreateOrderDTO orderDTO){

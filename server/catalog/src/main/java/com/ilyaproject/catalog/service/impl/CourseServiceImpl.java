@@ -16,6 +16,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,10 +52,10 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Boolean reserveCourse(Long courseId) {
-        Optional<Course> course = courseRepository.findById(courseId);
+    public Boolean reserveCourse(Long courseId, BigDecimal price) {
+        Optional<Course> course = courseRepository.findByCourseIdAndPrice(courseId, price);
         if (course.isEmpty()){
-            throw new CourseNotFoundException("Course with id " + courseId + " was not found");
+            throw new CourseNotFoundException("Course with id " + courseId + " and price " + price + " was not found");
         }
         int update = courseRepository.tryReserve(courseId);
         return update == 1;

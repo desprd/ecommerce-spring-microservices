@@ -9,6 +9,7 @@ public class OrderMapper {
                 .builder()
                 .customerId(orderDTO.getCustomerId())
                 .courseId(orderDTO.getCourseId())
+                .price(orderDTO.getPrice())
                 .build();
     }
 }

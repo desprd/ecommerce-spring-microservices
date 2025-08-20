@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
     @Modifying
@@ -19,4 +22,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
            AND c.spotsLeft >= 1
     """)
     int tryReserve(@Param("courseId") Long courseId);
+
+    Optional<Course> findByCourseIdAndPrice(Long courseId, BigDecimal price);
 }
