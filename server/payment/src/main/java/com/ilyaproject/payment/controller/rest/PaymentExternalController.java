@@ -32,9 +32,4 @@ public class PaymentExternalController {
                 .body(new ResponseDTO(PaymentConstants.STATUS_200, PaymentConstants.MESSAGE_200));
     }
 
-    @GetMapping("/test")
-    public String sendMessage(){
-        kafkaTemplate.send("payments.succeeded.v1", new PaymentResultDTO(Long.valueOf(3), true));
-        return "success";
-    }
 }

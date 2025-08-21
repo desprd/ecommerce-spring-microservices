@@ -11,9 +11,7 @@ service PaymentService {
 }
 
 message PaymentRequest {
-  int64 courseId = 1;
-  int64 customerId = 2;
-  string price = 3;
+  int64 orderId = 1;
 }
 
 message PaymentResponse {

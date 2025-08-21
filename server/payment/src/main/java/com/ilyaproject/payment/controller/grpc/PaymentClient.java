@@ -16,12 +16,10 @@ public class PaymentClient {
 
     private final PaymentServiceGrpc.PaymentServiceBlockingStub blockingStub;
 
-    public boolean checkPaymentDetails(Long courseId, Long customerId, BigDecimal price){
+    public boolean checkPaymentDetails(Long orderId){
         PaymentRequest request = PaymentRequest
                 .newBuilder()
-                .setCustomerId(customerId)
-                .setCourseId(courseId)
-                .setPrice(price.toPlainString())
+                .setOrderId(orderId)
                 .build();
         try {
             PaymentResponse response = blockingStub.paymentValidation(request);

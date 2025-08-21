@@ -22,7 +22,7 @@ public class PaymentService extends PaymentServiceGrpc.PaymentServiceImplBase {
     @Override
     public void paymentValidation(PaymentRequest request, StreamObserver<PaymentResponse> responseObserver) {
         try {
-            orderService.isPaymentInformationValid(request.getCourseId(), request.getCustomerId(), new BigDecimal(request.getPrice()));
+            orderService.isPaymentInformationValid(request.getOrderId());
             PaymentResponse response = PaymentResponse
                     .newBuilder()
                     .setIsValid(true)

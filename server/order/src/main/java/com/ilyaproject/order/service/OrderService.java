@@ -7,6 +7,6 @@ import java.math.BigDecimal;
 public interface OrderService {
     void createService(CreateOrderDTO orderDTO);
 
-    void isPaymentInformationValid(Long courseId, Long customerId, BigDecimal price);
+    void isPaymentInformationValid(Long orderId);
 
 }

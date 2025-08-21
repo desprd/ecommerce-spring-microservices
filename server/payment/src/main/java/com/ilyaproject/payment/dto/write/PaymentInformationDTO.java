@@ -12,13 +12,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class PaymentInformationDTO {
-    @NotNull(message = "Course id cannot be null")
-    @Min(value = 1, message = "Course id cannot be less then 1")
-    private Long courseId;
-
-    @NotNull(message = "Customer id cannot be null")
-    @Min(value = 1, message = "Customer id cannot be less then 1")
-    private Long customerId;
+    @NotNull(message = "Order id cannot be null")
+    @Min(value = 1, message = "Order id cannot be less then 1")
+    private Long orderId;
 
     @NotNull(message = "Price cannot be empty")
     @DecimalMin("0.00")

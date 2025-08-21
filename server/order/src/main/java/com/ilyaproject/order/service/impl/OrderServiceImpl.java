@@ -33,10 +33,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void isPaymentInformationValid(Long courseId, Long customerId, BigDecimal price) {
-        Optional<Order> order = orderRepository.findOrderByPaymentInformation(courseId, customerId, price);
+    public void isPaymentInformationValid(Long orderId) {
+        Optional<Order> order = orderRepository.findById(orderId);
         if (order.isEmpty()){
-            throw new OrderWasNotFound(String.format("Order with course id %s, customer id %s and price %s was not found", courseId, customerId, price));
+            throw new OrderWasNotFound(String.format("Order with id %s was not found", orderId));
         }
     }
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderGroupListeners {
 
-    @KafkaListener(topics = "payments.succeeded.v1", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${app.kafka.topics.payment-succeeded}", groupId = "${spring.kafka.consumer.group-id}")
     public void paymentListener(PaymentResultDTO resultDTO){
         System.out.println(resultDTO.getOrderId());
     }
