@@ -4,6 +4,7 @@ package com.ilyaproject.order.controller.grpc.service;
 import com.ilyaproject.api.PaymentRequest;
 import com.ilyaproject.api.PaymentResponse;
 import com.ilyaproject.api.PaymentServiceGrpc;
+import com.ilyaproject.order.exception.OrderAlreadyInPaidStatusException;
 import com.ilyaproject.order.exception.OrderWasNotFound;
 import com.ilyaproject.order.service.impl.OrderServiceImpl;
 import io.grpc.Status;
@@ -29,6 +30,9 @@ public class PaymentService extends PaymentServiceGrpc.PaymentServiceImplBase {
                     .build();
             responseObserver.onNext(response);
         }catch (OrderWasNotFound e){
+            responseObserver.onError(Status.NOT_FOUND.withDescription(e.getMessage()).asRuntimeException());
+            responseObserver.onCompleted();
+        }catch (OrderAlreadyInPaidStatusException e){
             responseObserver.onError(Status.NOT_FOUND.withDescription(e.getMessage()).asRuntimeException());
             responseObserver.onCompleted();
         }catch (Exception e){

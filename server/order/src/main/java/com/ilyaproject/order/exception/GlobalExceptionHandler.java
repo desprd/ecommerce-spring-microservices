@@ -58,4 +58,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         );
         return new ResponseEntity<>(errorResponseDTO, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(OrderAlreadyInPaidStatusException.class)
+    public ResponseEntity<ErrorResponseDTO> orderAlreadyExistsExceptionHandler(OrderAlreadyInPaidStatusException exception,
+                                                                               WebRequest webRequest){
+        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
+                webRequest.getDescription(false),
+                HttpStatus.BAD_REQUEST,
+                exception.getMessage(),
+                Instant.now()
+        );
+        return new ResponseEntity<>(errorResponseDTO, HttpStatus.BAD_REQUEST);
+    }
 }

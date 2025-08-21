@@ -3,7 +3,10 @@ package com.ilyaproject.order.service.impl;
 import com.ilyaproject.order.controller.grpc.client.OrderClient;
 import com.ilyaproject.order.dto.write.CreateOrderDTO;
 import com.ilyaproject.order.entity.Order;
+import com.ilyaproject.order.entity.Status;
+import com.ilyaproject.order.exception.FailedToUpdateOrderStatusException;
 import com.ilyaproject.order.exception.OrderAlreadyExistsException;
+import com.ilyaproject.order.exception.OrderAlreadyInPaidStatusException;
 import com.ilyaproject.order.exception.OrderWasNotFound;
 import com.ilyaproject.order.mapper.OrderMapper;
 import com.ilyaproject.order.repository.OrderRepository;
@@ -37,6 +40,22 @@ public class OrderServiceImpl implements OrderService {
         Optional<Order> order = orderRepository.findById(orderId);
         if (order.isEmpty()){
             throw new OrderWasNotFound(String.format("Order with id %s was not found", orderId));
+        }
+        if (order.get().getStatus() == Status.PAID){
+            throw new OrderAlreadyInPaidStatusException(String.format("Order with id %s already has been paid", orderId));
+        }
+    }
+
+    @Override
+    public void changeOrderStatusAfterPayment(Long orderId, boolean success) {
+        int status = 0;
+        if (success){
+            status = orderRepository.changeOrderStatusToPaid(orderId);
+        }else {
+            status = orderRepository.changeOrderStatusToCancelled(orderId);
+        }
+        if (status == 0){
+            throw new FailedToUpdateOrderStatusException(String.format("Failed to update order status, order id is %s", orderId));
         }
     }
 

@@ -1,7 +1,9 @@
 package com.ilyaproject.order.repository;
 
 import com.ilyaproject.order.entity.Order;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -18,4 +20,22 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
         """, nativeQuery = true)
     Optional<Order> findSameOrder(@Param("customerId") Long customerId, @Param("courseId") Long courseId);
 
+    @Modifying
+    @Transactional
+    @Query(value = """
+        UPDATE orders
+        SET status = 'PAID'
+        WHERE order_id = :orderId
+        """, nativeQuery = true)
+    int changeOrderStatusToPaid(@Param("orderId") Long orderId);
+
+    @Modifying
+    @Transactional
+    @Query(value = """
+        UPDATE orders
+        SET status = 'CANCELLED'
+        WHERE order_id = :orderId
+            AND status = 'PENDING'
+        """, nativeQuery = true)
+    int changeOrderStatusToCancelled(@Param("orderId") Long orderId);
 }

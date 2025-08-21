@@ -9,4 +9,6 @@ public interface OrderService {
 
     void isPaymentInformationValid(Long orderId);
 
+    void changeOrderStatusAfterPayment(Long orderId, boolean success);
+
 }
