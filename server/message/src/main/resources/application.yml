@@ -1,0 +1,26 @@
+server:
+  port: ${SERVER_PORT:8060}
+spring:
+  application:
+     name: message
+  kafka:
+    bootstrap-servers: ${BOOTSTRAP-SERVERS-KAFKA:localhost:9094}
+    consumer:
+      group-id: ${GROUP-ID-KAFKA:order-group-id}
+  mail:
+    host: ${SPRING-MAIL-HOST:smtp.gmail.com}
+    port: ${SPRING-MAIL-PORT:587}
+    username: ${SPRING-MAIL-USERNAME:demospringemail6@gmail.com}
+    password: ${SPRING-MAIL-PASSWORD:nsed nrwz euge wkxk}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+app:
+  mail:
+    sender: ${APP-MAIL-SENDER:demospringemail6@gmail.com}
+    recipient: ${APP-MAIL-RECIPIENT:mishamazbelazkamaz@gmail.com}
+
