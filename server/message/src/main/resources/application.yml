@@ -19,7 +19,20 @@ spring:
           starttls:
             enable: true
             required: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      probes:
+        enabled: true
 app:
+  kafka:
+    topics:
+      message-success: ${TOPIC-MESSAGE-SUCCESS:message.success.v1}
+    trusted: ${KAFKA-TRUSTED-PACKAGE:com.ilyaproject.*}
   mail:
     sender: ${APP-MAIL-SENDER:demospringemail6@gmail.com}
     recipient: ${APP-MAIL-RECIPIENT:mishamazbelazkamaz@gmail.com}

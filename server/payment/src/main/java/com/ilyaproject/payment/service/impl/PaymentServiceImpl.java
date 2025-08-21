@@ -25,5 +25,6 @@ public class PaymentServiceImpl implements PaymentService {
             throw new WrongPaymentAmountException("Wrong amount! User paid " + paymentInformationDTO.getPaidAmount() + " when the course is " + paymentInformationDTO.getPrice());
         }
         kafkaTemplate.send("payments.succeeded.v1", new PaymentResultDTO(paymentInformationDTO.getOrderId(), true));
+        kafkaTemplate.send("message.success.v1", new PaymentResultDTO(paymentInformationDTO.getOrderId(), true));
     }
 }

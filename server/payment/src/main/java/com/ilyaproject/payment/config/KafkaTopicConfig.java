@@ -43,4 +43,13 @@ public class KafkaTopicConfig {
                 .build();
     }
 
+    @Bean
+    public NewTopic topic3(){
+        return TopicBuilder
+                .name("message.success.v1")
+                .partitions(1)
+                .replicas(1)
+                .build();
+    }
+
 }
