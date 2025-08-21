@@ -13,7 +13,10 @@ public class OrderGroupListeners {
 
     private final OrderServiceImpl orderService;
 
-    @KafkaListener(topics = "${app.kafka.topics.payment-succeeded}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = {
+            "${app.kafka.topics.payment-succeeded}",
+            "${app.kafka.topics.payment-failed}"
+    }, groupId = "${spring.kafka.consumer.group-id}")
     public void paymentListener(PaymentResultDTO resultDTO){
         orderService.changeOrderStatusAfterPayment(resultDTO.getOrderId(), resultDTO.getIsSucceeded());
     }

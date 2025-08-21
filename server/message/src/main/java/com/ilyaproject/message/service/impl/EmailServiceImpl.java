@@ -3,7 +3,6 @@ package com.ilyaproject.message.service.impl;
 import com.ilyaproject.message.dto.SimpleEmailMessageDTO;
 import com.ilyaproject.message.service.EmailService;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.message.SimpleMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;

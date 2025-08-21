@@ -34,4 +34,13 @@ public class KafkaTopicConfig {
                 .build();
     }
 
+    @Bean
+    public NewTopic topic2(){
+        return TopicBuilder
+                .name("payments.failed.v1")
+                .partitions(1)
+                .replicas(1)
+                .build();
+    }
+
 }

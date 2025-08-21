@@ -19,10 +19,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void pay(PaymentInformationDTO paymentInformationDTO) {
+        paymentClient.checkPaymentDetails(paymentInformationDTO.getOrderId());
         if (!paymentInformationDTO.getPrice().equals(paymentInformationDTO.getPaidAmount())){
+            kafkaTemplate.send("payments.failed.v1", new PaymentResultDTO(paymentInformationDTO.getOrderId(), false));
             throw new WrongPaymentAmountException("Wrong amount! User paid " + paymentInformationDTO.getPaidAmount() + " when the course is " + paymentInformationDTO.getPrice());
         }
-        paymentClient.checkPaymentDetails(paymentInformationDTO.getOrderId());
         kafkaTemplate.send("payments.succeeded.v1", new PaymentResultDTO(paymentInformationDTO.getOrderId(), true));
     }
 }

@@ -35,7 +35,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
         UPDATE orders
         SET status = 'CANCELLED'
         WHERE order_id = :orderId
-            AND status = 'PENDING'
+            AND (status = 'PENDING' OR status = 'CANCELLED')
         """, nativeQuery = true)
     int changeOrderStatusToCancelled(@Param("orderId") Long orderId);
 }
