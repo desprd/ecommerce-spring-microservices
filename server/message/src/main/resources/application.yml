@@ -36,4 +36,3 @@ app:
   mail:
     sender: ${APP-MAIL-SENDER:demospringemail6@gmail.com}
     recipient: ${APP-MAIL-RECIPIENT:mishamazbelazkamaz@gmail.com}
-

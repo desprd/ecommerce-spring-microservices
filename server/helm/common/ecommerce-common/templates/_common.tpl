@@ -63,6 +63,11 @@ spec:
               value: "PLAINTEXT"
             {{- end }}
 
+            # === Kafka ===
+            {{- if .Values.kafka.enabled }}
+            - name: BOOTSTRAP-SERVERS-KAFKA
+            value:
+
           # Probes: choose gRPC or HTTP actuator
           {{- if and .Values.grpc.enabled .Values.probes.grpc.enabled }}
           livenessProbe:

@@ -39,4 +39,3 @@ app:
       payment-succeeded: ${TOPIC-PAYMENT-SUCCEEDED:payments.succeeded.v1}
       payment-failed: ${TOPIC-PAYMENT-FAILED:payments.failed.v1}
     trusted: ${KAFKA-TRUSTED-PACKAGE:com.ilyaproject.*}
-
