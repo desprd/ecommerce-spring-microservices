@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    kubernetes:
+      discovery:
+        enabled: false
+
+    gateway:
+      routes:
+        - id: catalog
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/**
+        - id: order
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/**
+        - id: payment
+          uri: http://localhost:8070
+          predicates:
+            - Path=/api/**
+        - id: message
+          uri: http://localhost:8060
+          predicates:
+            - Path=/api/**
