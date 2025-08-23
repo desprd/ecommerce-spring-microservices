@@ -16,3 +16,18 @@ management:
         enabled: true
     gateway:
       access: unrestricted
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 2
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+    instances:
+      coursesCircuitBreaker:
+        baseConfig: default
+  timelimiter:
+    instances:
+      coursesCircuitBreaker:
+        timeoutDuration: 5s
