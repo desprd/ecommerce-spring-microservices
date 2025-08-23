@@ -1,0 +1,61 @@
+deploymentName: message
+serviceName: message
+appLabel: message
+appName: message
+
+replicaCount: 1
+image:
+  repository: docker.io/ilya95k/message
+  tag: s1
+
+containerPort: 8060
+
+grpc:
+  enabled: false
+catalogGrpc:
+  enabled: false
+orderGrpc:
+  enabled: false
+service:
+  type: ClusterIP
+  port: 8060
+  targetPort: 8060
+
+
+postgres:
+  enabled: false
+
+redis:
+  enabled: false
+
+kafka:
+  enabled: true
+  server: kafka:9092
+kafkaClient:
+  enabled: true
+  group: order-group-id
+  topic:
+    payment:
+      enabled: false
+    message:
+      enabled: true
+      successMessage: message.success.v1
+  trusted: com.ilyaproject.*
+
+email:
+  enabled: true
+  host: smtp.gmail.com
+  port: "587"
+  sender: demospringemail6@gmail.com
+  recipient: mishamazbelazkamaz@gmail.com
+  secret:
+    name: payment-email
+    usernameKey: username
+    passwordKey: password
+
+probes:
+  grpc:
+    enabled: false
+  http:
+    enabled: true
+    path: /actuator/health

@@ -4,14 +4,14 @@ spring:
   application:
      name: message
   kafka:
-    bootstrap-servers: ${BOOTSTRAP-SERVERS-KAFKA:localhost:9094}
+    bootstrap-servers: ${BOOTSTRAP_SERVERS_KAFKA:localhost:9094}
     consumer:
-      group-id: ${GROUP-ID-KAFKA:order-group-id}
+      group-id: ${GROUP_ID_KAFKA:order-group-id}
   mail:
-    host: ${SPRING-MAIL-HOST:smtp.gmail.com}
-    port: ${SPRING-MAIL-PORT:587}
-    username: ${SPRING-MAIL-USERNAME:demospringemail6@gmail.com}
-    password: ${SPRING-MAIL-PASSWORD:nsed nrwz euge wkxk}
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME:demospringemail6@gmail.com}
+    password: ${SPRING_MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -31,8 +31,8 @@ management:
 app:
   kafka:
     topics:
-      message-success: ${TOPIC-MESSAGE-SUCCESS:message.success.v1}
-    trusted: ${KAFKA-TRUSTED-PACKAGE:com.ilyaproject.*}
+      message-success: ${TOPIC_MESSAGE_SUCCESS:message.success.v1}
+    trusted: ${KAFKA_TRUSTED_PACKAGE:com.ilyaproject.*}
   mail:
-    sender: ${APP-MAIL-SENDER:demospringemail6@gmail.com}
-    recipient: ${APP-MAIL-RECIPIENT:mishamazbelazkamaz@gmail.com}
+    sender: ${APP_MAIL_SENDER:demospringemail6@gmail.com}
+    recipient: ${APP_MAIL_RECIPIENT:mishamazbelazkamaz@gmail.com}

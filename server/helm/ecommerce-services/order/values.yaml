@@ -11,11 +11,14 @@ image:
 containerPort: 8090
 
 grpc:
-  enabled: false
+  enabled: true
+  port: 9091
 catalogGrpc:
   enabled: true
   host: catalog
   port: 9090
+orderGrpc:
+  enabled: false
 
 service:
   type: ClusterIP
@@ -24,6 +27,7 @@ service:
 
 
 postgres:
+  enabled: true
   host: orderdb-postgresql
   port: "5432"
   database: orderdb
@@ -36,6 +40,23 @@ postgres:
 redis:
   enabled: false
 
+kafka:
+  enabled: true
+  server: kafka:9092
+kafkaClient:
+  enabled: true
+  group: order-group-id
+  topic:
+    payment:
+      enabled: true
+      paymentSucceeded: payments.succeeded.v1
+      paymentFailed: payments.failed.v1
+    message:
+      enabled: false
+  trusted: com.ilyaproject.*
+
+email:
+  enabled: false
 
 probes:
   grpc:

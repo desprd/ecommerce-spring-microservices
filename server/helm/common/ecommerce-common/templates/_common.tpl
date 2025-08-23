@@ -28,6 +28,7 @@ spec:
           env:
 
             # === PostgreSQL ===
+            {{- if .Values.postgres.enabled }}
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://{{ .Values.postgres.host }}:{{ .Values.postgres.port }}/{{ .Values.postgres.database }}"
             - name: SPRING_DATASOURCE_USERNAME
@@ -37,6 +38,7 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.postgres.passwordSecret.name }}
                   key: {{ .Values.postgres.passwordSecret.key }}
+            {{- end }}
 
             # === Redis ===
             {{- if .Values.redis.enabled }}
@@ -62,11 +64,55 @@ spec:
             - name: CATALOG_GRPC_NEGOTIATION
               value: "PLAINTEXT"
             {{- end }}
-
+            {{- if .Values.orderGrpc.enabled }}
+            - name: ORDER_GRPC_ADDR
+              value: "dns:///{{ .Values.orderGrpc.host }}:{{ .Values.orderGrpc.port }}"
+            - name: ORDER_GRPC_NEGOTIATION
+              value: "PLAINTEXT"
+            {{- end }}
             # === Kafka ===
             {{- if .Values.kafka.enabled }}
-            - name: BOOTSTRAP-SERVERS-KAFKA
-            value:
+            - name: BOOTSTRAP_SERVERS_KAFKA
+              value: {{ .Values.kafka.server }}
+            {{- end }}
+            {{- if .Values.kafkaClient.enabled }}
+            - name: GROUP_ID_KAFKA
+              value: {{ .Values.kafkaClient.group }}
+            {{- if .Values.kafkaClient.topic.payment.enabled }}
+            - name: TOPIC_PAYMENT_SUCCEEDED
+              value: {{ .Values.kafkaClient.topic.payment.paymentSucceeded }}
+            - name: TOPIC_PAYMENT_FAILED
+              value: {{ .Values.kafkaClient.topic.payment.paymentFailed }}
+            {{- end }}
+            {{- if .Values.kafkaClient.topic.message.enabled }}
+            - name: TOPIC_MESSAGE_SUCCESS
+              value: {{ .Values.kafkaClient.topic.message.successMessage }}
+            {{- end }}
+            - name: KAFKA_TRUSTED_PACKAGE
+              value: {{ .Values.kafkaClient.trusted }}
+            {{- end }}
+
+            # === Email ===
+            {{- if .Values.email.enabled }}
+            - name: SPRING_MAIL_HOST
+              value: {{ .Values.email.host }}
+            - name: SPRING_MAIL_PORT
+              value: {{ .Values.email.port | quote }}
+            - name: SPRING_MAIL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.email.secret.name }}
+                  key: {{ .Values.email.secret.usernameKey }}
+            - name: SPRING_MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.email.secret.name }}
+                  key: {{ .Values.email.secret.passwordKey }}
+            - name: APP_MAIL_SENDER
+              value: {{ .Values.email.sender }}
+            - name: APP_MAIL_RECIPIENT
+              value: {{ .Values.email.recipient }}
+            {{- end }}
 
           # Probes: choose gRPC or HTTP actuator
           {{- if and .Values.grpc.enabled .Values.probes.grpc.enabled }}

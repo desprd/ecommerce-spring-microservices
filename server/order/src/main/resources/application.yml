@@ -21,9 +21,9 @@ spring:
           address: ${CATALOG_GRPC_ADDR:0.0.0.0:9090}
           negotiationType: ${CATALOG_GRPC_NEGOTIATION:PLAINTEXT}
   kafka:
-    bootstrap-servers: ${BOOTSTRAP-SERVERS-KAFKA:localhost:9094}
+    bootstrap-servers: ${BOOTSTRAP_SERVERS_KAFKA:localhost:9094}
     consumer:
-      group-id: ${GROUP-ID-KAFKA:order-group-id}
+      group-id: ${GROUP_ID_KAFKA:order-group-id}
 management:
   endpoints:
     web:
@@ -36,6 +36,6 @@ management:
 app:
   kafka:
     topics:
-      payment-succeeded: ${TOPIC-PAYMENT-SUCCEEDED:payments.succeeded.v1}
-      payment-failed: ${TOPIC-PAYMENT-FAILED:payments.failed.v1}
-    trusted: ${KAFKA-TRUSTED-PACKAGE:com.ilyaproject.*}
+      payment-succeeded: ${TOPIC_PAYMENT_SUCCEEDED:payments.succeeded.v1}
+      payment-failed: ${TOPIC_PAYMENT_FAILED:payments.failed.v1}
+    trusted: ${KAFKA_TRUSTED_PACKAGE:com.ilyaproject.*}

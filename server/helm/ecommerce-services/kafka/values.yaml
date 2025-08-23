@@ -62,4 +62,3 @@ config:
   log.retention.hours: "168"
   log.segment.bytes: "1073741824"
   log.retention.check.interval.ms: "300000"
-

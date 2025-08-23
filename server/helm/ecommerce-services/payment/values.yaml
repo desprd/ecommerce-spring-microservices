@@ -1,0 +1,48 @@
+deploymentName: payment
+serviceName: payment
+appLabel: payment
+appName: payment
+
+replicaCount: 1
+image:
+  repository: docker.io/ilya95k/payment
+  tag: s1
+
+containerPort: 8070
+
+grpc:
+  enabled: false
+catalogGrpc:
+  enabled: false
+orderGrpc:
+  enabled: true
+  host: order
+  port: 9091
+
+service:
+  type: ClusterIP
+  port: 8070
+  targetPort: 8070
+
+
+postgres:
+  enabled: false
+
+redis:
+  enabled: false
+
+kafka:
+  enabled: true
+  server: kafka:9092
+kafkaClient:
+  enabled: false
+
+email:
+  enabled: false
+
+probes:
+  grpc:
+    enabled: false
+  http:
+    enabled: true
+    path: /actuator/health
