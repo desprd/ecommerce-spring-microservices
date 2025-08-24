@@ -1,6 +1,7 @@
 package com.ilyaproject.catalog.service.impl;
 
-import com.ilyaproject.catalog.dto.read.CourseFullDTO;
+
+import com.ilyaproject.api.dto.catalog.CourseFullDTO;
 import com.ilyaproject.catalog.dto.write.CreateCourseDTO;
 import com.ilyaproject.catalog.entity.Author;
 import com.ilyaproject.catalog.entity.Course;
@@ -20,6 +21,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +36,7 @@ public class CourseServiceImpl implements CourseService {
         List<Course> courses = courseRepository.findAll();
         List<CourseFullDTO> coursesDTO = new ArrayList<>();
         if (!courses.isEmpty()){
-            coursesDTO = courses.stream().map(CourseMapper::mapToCourseFullDTO).toList();
+            coursesDTO = courses.stream().map(CourseMapper::mapToCourseFullDTO).collect(Collectors.toList());
         }
         return coursesDTO;
     }

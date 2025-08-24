@@ -1,7 +1,8 @@
 package com.ilyaproject.catalog.controller.rest;
 
+import com.ilyaproject.api.dto.catalog.CourseFullDTO;
 import com.ilyaproject.catalog.constants.CourseConstants;
-import com.ilyaproject.catalog.dto.read.CourseFullDTO;
+
 import com.ilyaproject.catalog.dto.general.ResponseDTO;
 import com.ilyaproject.catalog.dto.write.CreateCourseDTO;
 import com.ilyaproject.catalog.service.impl.CourseServiceImpl;

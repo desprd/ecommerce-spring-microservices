@@ -17,8 +17,11 @@ public class GatewayServerConfiguration {
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder){
         return builder.routes()
-                .route(r -> r.path("/api/rest/courses")
-                        .filters(f-> f.circuitBreaker(config -> config.setName("coursesCircuitBreaker")))
+                .route(r -> r.path("/api/rest/courses/**")
+                        .filters(f->
+                                f.circuitBreaker(config ->
+                                        config.setName("coursesCircuitBreaker")
+                                              .setFallbackUri("forward:/contactsupport")))
                         .uri(routeService.getUriById("catalog"))).build();
     }
 }

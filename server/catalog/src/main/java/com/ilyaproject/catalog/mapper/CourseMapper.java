@@ -1,6 +1,7 @@
 package com.ilyaproject.catalog.mapper;
 
-import com.ilyaproject.catalog.dto.read.CourseFullDTO;
+
+import com.ilyaproject.api.dto.catalog.CourseFullDTO;
 import com.ilyaproject.catalog.dto.write.CreateCourseDTO;
 import com.ilyaproject.catalog.entity.Author;
 import com.ilyaproject.catalog.entity.Course;

@@ -1,11 +1,13 @@
-package com.ilyaproject.catalog.dto.read;
+package com.ilyaproject.api.dto.catalog;
+
 
 import lombok.*;
 
 import java.math.BigDecimal;
 
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

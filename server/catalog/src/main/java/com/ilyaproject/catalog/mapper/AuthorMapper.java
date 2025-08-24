@@ -1,6 +1,7 @@
 package com.ilyaproject.catalog.mapper;
 
-import com.ilyaproject.catalog.dto.read.AuthorSummaryDTO;
+
+import com.ilyaproject.api.dto.catalog.AuthorSummaryDTO;
 import com.ilyaproject.catalog.dto.write.CreateAuthorDTO;
 import com.ilyaproject.catalog.entity.Author;
 

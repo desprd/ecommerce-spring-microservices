@@ -1,6 +1,7 @@
 package com.ilyaproject.catalog.service;
 
-import com.ilyaproject.catalog.dto.read.CourseFullDTO;
+
+import com.ilyaproject.api.dto.catalog.CourseFullDTO;
 import com.ilyaproject.catalog.dto.write.CreateCourseDTO;
 import org.springframework.stereotype.Service;
 
