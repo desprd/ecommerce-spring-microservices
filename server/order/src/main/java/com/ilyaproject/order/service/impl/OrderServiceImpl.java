@@ -1,6 +1,7 @@
 package com.ilyaproject.order.service.impl;
 
 import com.ilyaproject.order.controller.grpc.client.OrderClient;
+import com.ilyaproject.order.dto.read.ResponseOrderDTO;
 import com.ilyaproject.order.dto.write.CreateOrderDTO;
 import com.ilyaproject.order.entity.Order;
 import com.ilyaproject.order.entity.Status;
@@ -57,6 +58,14 @@ public class OrderServiceImpl implements OrderService {
         if (status == 0){
             throw new FailedToUpdateOrderStatusException(String.format("Failed to update order status, order id is %s", orderId));
         }
+    }
+
+    @Override
+    public ResponseOrderDTO fetchOrderById(Long id) {
+        Order order = orderRepository
+                .findById(id)
+                .orElseThrow(() -> new OrderWasNotFound("Order with id " + id + " was now found"));
+        return OrderMapper.mapToResponseOrderDTO(order);
     }
 
     private Boolean checkIfOrderIsValid(CreateOrderDTO orderDTO){

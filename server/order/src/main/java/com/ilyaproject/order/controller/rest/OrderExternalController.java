@@ -3,6 +3,7 @@ package com.ilyaproject.order.controller.rest;
 import com.ilyaproject.order.constants.OrderConstants;
 import com.ilyaproject.order.controller.grpc.client.OrderClient;
 import com.ilyaproject.order.dto.general.ResponseDTO;
+import com.ilyaproject.order.dto.read.ResponseOrderDTO;
 import com.ilyaproject.order.dto.write.CreateOrderDTO;
 import com.ilyaproject.order.entity.Order;
 import com.ilyaproject.order.repository.OrderRepository;
@@ -24,11 +25,20 @@ import java.util.Optional;
 public class OrderExternalController {
 
     private final OrderServiceImpl orderService;
+
     @PostMapping("/createorder")
     public ResponseEntity<ResponseDTO> createOrder(@Valid @RequestBody CreateOrderDTO orderDTO){
         orderService.createService(orderDTO);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new ResponseDTO(OrderConstants.STATUS_201, OrderConstants.MESSAGE_201));
+    }
+
+    @GetMapping("/order/{id}")
+    public ResponseEntity<ResponseOrderDTO> fetchOrderById(@PathVariable Long id){
+        ResponseOrderDTO orderDTO = orderService.fetchOrderById(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(orderDTO);
     }
 }

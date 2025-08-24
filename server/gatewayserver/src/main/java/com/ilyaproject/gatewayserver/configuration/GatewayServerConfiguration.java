@@ -17,11 +17,19 @@ public class GatewayServerConfiguration {
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder){
         return builder.routes()
-                .route(r -> r.path("/api/rest/courses/**")
+                .route(r -> r.path("/api/rest/courses")
                         .filters(f->
                                 f.circuitBreaker(config ->
                                         config.setName("coursesCircuitBreaker")
                                               .setFallbackUri("forward:/contactsupport")))
-                        .uri(routeService.getUriById("catalog"))).build();
+                        .uri(routeService.getUriById("catalog")))
+                .route(r -> r.path("/api/rest/courses/**")
+                        .uri(routeService.getUriById("catalog")))
+                .route(r -> r.path("/api/rest/order/**")
+                        .uri(routeService.getUriById("order")))
+                .route(r -> r.path("/api/rest/author/**")
+                        .uri(routeService.getUriById("catalog")))
+                .route(r -> r.path("/api/rest/payment/**")
+                        .uri(routeService.getUriById("payment"))).build();
     }
 }

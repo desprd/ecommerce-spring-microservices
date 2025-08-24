@@ -60,7 +60,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(OrderAlreadyInPaidStatusException.class)
-    public ResponseEntity<ErrorResponseDTO> orderAlreadyExistsExceptionHandler(OrderAlreadyInPaidStatusException exception,
+    public ResponseEntity<ErrorResponseDTO> orderAlreadyPaidExceptionHandler(OrderAlreadyInPaidStatusException exception,
                                                                                WebRequest webRequest){
         ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
                 webRequest.getDescription(false),
