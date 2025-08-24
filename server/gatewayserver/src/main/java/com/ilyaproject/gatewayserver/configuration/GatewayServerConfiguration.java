@@ -17,19 +17,41 @@ public class GatewayServerConfiguration {
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder){
         return builder.routes()
-                .route(r -> r.path("/api/rest/courses")
+                .route(r -> r.path("/api/rest/course/get")
                         .filters(f->
                                 f.circuitBreaker(config ->
                                         config.setName("coursesCircuitBreaker")
-                                              .setFallbackUri("forward:/contactsupport")))
+                                              .setFallbackUri("forward:/coursesCache")))
                         .uri(routeService.getUriById("catalog")))
-                .route(r -> r.path("/api/rest/courses/**")
+                .route(r -> r.path("/api/rest/course/create")
+                        .filters(f->
+                                f.circuitBreaker(config ->
+                                        config.setName("createCoursesCircuitBreaker")
+                                                .setFallbackUri("forward:/contactSupport")))
                         .uri(routeService.getUriById("catalog")))
-                .route(r -> r.path("/api/rest/order/**")
+                .route(r -> r.path("/api/rest/author/create")
+                        .filters(f->
+                                f.circuitBreaker(config ->
+                                        config.setName("createAuthorCircuitBreaker")
+                                                .setFallbackUri("forward:/contactSupport")))
+                        .uri(routeService.getUriById("catalog")))
+                .route(r -> r.path("/api/rest/order/create")
+                        .filters(f->
+                                f.circuitBreaker(config ->
+                                        config.setName("createOrderCircuitBreaker")
+                                                .setFallbackUri("forward:/contactSupport")))
                         .uri(routeService.getUriById("order")))
-                .route(r -> r.path("/api/rest/author/**")
-                        .uri(routeService.getUriById("catalog")))
+                .route(r -> r.path("/api/rest/order/get/{id}")
+                        .filters(f->
+                                f.circuitBreaker(config ->
+                                        config.setName("orderCircuitBreaker")
+                                                .setFallbackUri("forward:/contactSupport")))
+                        .uri(routeService.getUriById("order")))
                 .route(r -> r.path("/api/rest/payment/**")
+                        .filters(f->
+                                f.circuitBreaker(config ->
+                                        config.setName("paymentCircuitBreaker")
+                                                .setFallbackUri("forward:/contactSupport")))
                         .uri(routeService.getUriById("payment"))).build();
     }
 }

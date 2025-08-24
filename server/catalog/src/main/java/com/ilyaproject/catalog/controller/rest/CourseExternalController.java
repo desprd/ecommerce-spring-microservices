@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/api/rest", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path="/api/rest/course", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
 @RequiredArgsConstructor
 public class CourseExternalController {
 
     private final CourseServiceImpl courseService;
 
-    @GetMapping("/courses")
+    @GetMapping("/get")
     public ResponseEntity<List<CourseFullDTO>> fetchAllCourses(){
         List<CourseFullDTO> courses = courseService.fetchAllCourses();
         return ResponseEntity.status(HttpStatus.OK).body(courses);
     }
 
-    @PostMapping("/course/create")
+    @PostMapping("/create")
     public ResponseEntity<ResponseDTO> createCourse(@Valid @RequestBody CreateCourseDTO courseDTO){
         courseService.createCourse(courseDTO);
         return ResponseEntity

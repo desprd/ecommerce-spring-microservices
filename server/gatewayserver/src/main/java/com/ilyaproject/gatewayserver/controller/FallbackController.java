@@ -16,13 +16,18 @@ public class FallbackController {
 
     private final CacheService cacheService;
 
-    @RequestMapping("/contactsupport")
-    public Mono<?> contactSupport(){
+    @RequestMapping("/coursesCache")
+    public Mono<?> coursesCache(){
         List<CourseFullDTO> courses = cacheService.readCourses();
         if (courses.isEmpty()){
-            return Mono.just("Server is down. Please contact support for details.");
+            return Mono.just("Service is down. Please contact support for details.");
         }else {
             return Mono.just(courses);
         }
+    }
+
+    @RequestMapping("/contactSupport")
+    public Mono<?> contactSupport(){
+        return Mono.just("Service is down. Please contact support for details.");
     }
 }

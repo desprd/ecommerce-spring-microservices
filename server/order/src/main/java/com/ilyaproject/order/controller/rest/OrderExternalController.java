@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/api/rest", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path="/api/rest/order", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
 @RequiredArgsConstructor
 public class OrderExternalController {
 
     private final OrderServiceImpl orderService;
 
-    @PostMapping("/createorder")
+    @PostMapping("/create")
     public ResponseEntity<ResponseDTO> createOrder(@Valid @RequestBody CreateOrderDTO orderDTO){
         orderService.createService(orderDTO);
         return ResponseEntity
@@ -34,7 +34,7 @@ public class OrderExternalController {
                 .body(new ResponseDTO(OrderConstants.STATUS_201, OrderConstants.MESSAGE_201));
     }
 
-    @GetMapping("/order/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<ResponseOrderDTO> fetchOrderById(@PathVariable Long id){
         ResponseOrderDTO orderDTO = orderService.fetchOrderById(id);
         return ResponseEntity

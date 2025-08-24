@@ -41,7 +41,28 @@ resilience4j:
     instances:
       coursesCircuitBreaker:
         baseConfig: default
+      orderCircuitBreaker:
+        baseConfig: default
+      createCoursesCircuitBreaker:
+        baseConfig: default
+      createAuthorCircuitBreaker:
+        baseConfig: default
+      createOrderCircuitBreaker:
+        baseConfig: default
+      paymentCircuitBreaker:
+        baseConfig: default
+
   timelimiter:
     instances:
       coursesCircuitBreaker:
+        timeoutDuration: 5s
+      orderCircuitBreaker:
+        timeoutDuration: 5s
+      createCoursesCircuitBreaker:
+        timeoutDuration: 5s
+      createAuthorCircuitBreaker:
+        timeoutDuration: 5s
+      createOrderCircuitBreaker:
+        timeoutDuration: 5s
+      paymentCircuitBreaker:
         timeoutDuration: 5s

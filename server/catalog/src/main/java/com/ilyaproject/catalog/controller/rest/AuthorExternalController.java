@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path="/api/rest", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path="/api/rest/author", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
 @RequiredArgsConstructor
 public class AuthorExternalController {
 
     private final AuthorServiceImpl authorService;
 
-    @PostMapping("/author/create")
+    @PostMapping("/create")
     public ResponseEntity<ResponseDTO> createAuthor(@Valid @RequestBody CreateAuthorDTO authorDTO){
         authorService.createAuthor(authorDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
