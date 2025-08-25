@@ -3,12 +3,15 @@ package com.ilyaproject.gatewayserver.service;
 import com.ilyaproject.gatewayserver.configuration.GatewayRoutesProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+
 @Service
 public class RouteService {
     private final GatewayRoutesProperties properties;
 
     public RouteService(GatewayRoutesProperties properties) {
         this.properties = properties;
+
     }
 
     public String getUriById(String id) {
