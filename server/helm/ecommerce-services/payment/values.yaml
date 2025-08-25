@@ -10,6 +10,9 @@ image:
 
 containerPort: 8070
 
+profile:
+  enabled: false
+
 grpc:
   enabled: false
 catalogGrpc:
@@ -38,6 +41,9 @@ kafkaClient:
   enabled: false
 
 email:
+  enabled: false
+
+oauth2:
   enabled: false
 
 probes:

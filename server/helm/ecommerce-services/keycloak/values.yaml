@@ -1,0 +1,5 @@
+auth:
+  adminUser: admin
+  adminPassword: admin
+service:
+  type: LoadBalancer

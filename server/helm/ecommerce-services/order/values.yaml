@@ -10,6 +10,9 @@ image:
 
 containerPort: 8090
 
+profile:
+  enabled: false
+
 grpc:
   enabled: true
   port: 9091
@@ -56,6 +59,9 @@ kafkaClient:
   trusted: com.ilyaproject.*
 
 email:
+  enabled: false
+
+oauth2:
   enabled: false
 
 probes:

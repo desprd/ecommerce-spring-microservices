@@ -10,6 +10,9 @@ image:
 
 containerPort: 8080
 
+profile:
+  enabled: false
+
 grpc:
   enabled: true
   port: 9090
@@ -48,6 +51,9 @@ redis:
     key: redis-password
 
 email:
+  enabled: false
+
+oauth2:
   enabled: false
 
 probes:

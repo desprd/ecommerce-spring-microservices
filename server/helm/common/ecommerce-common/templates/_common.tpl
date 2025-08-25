@@ -27,6 +27,12 @@ spec:
             {{- end }}
           env:
 
+            # === Profile ===
+            {{- if .Values.profile.enabled }}
+            - name: SPRING_PROFILE_ACTIVE
+              value: {{ .Values.profile.active | quote }}
+            {{- end }}
+
             # === PostgreSQL ===
             {{- if .Values.postgres.enabled }}
             - name: SPRING_DATASOURCE_URL
@@ -112,6 +118,12 @@ spec:
               value: {{ .Values.email.sender }}
             - name: APP_MAIL_RECIPIENT
               value: {{ .Values.email.recipient }}
+            {{- end }}
+
+            # === Oauth2 ===
+            {{- if .Values.oauth2.enabled }}
+            - name: OAUTH2_JWT_URI
+              value: {{ .Values.oauth2.uri | quote }}
             {{- end }}
 
           # Probes: choose gRPC or HTTP actuator

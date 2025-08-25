@@ -10,6 +10,9 @@ image:
 
 containerPort: 8060
 
+profile:
+  enabled: false
+
 grpc:
   enabled: false
 catalogGrpc:
@@ -52,6 +55,9 @@ email:
     name: payment-email
     usernameKey: username
     passwordKey: password
+
+oauth2:
+  enabled: false
 
 probes:
   grpc:
