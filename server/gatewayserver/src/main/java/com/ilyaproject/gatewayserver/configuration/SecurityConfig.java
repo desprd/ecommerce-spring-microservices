@@ -24,10 +24,10 @@ public class SecurityConfig {
         serverHttpSecurity
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers(HttpMethod.GET).permitAll()
-                        .pathMatchers("/api/rest/course/**").authenticated()
+                        .pathMatchers("/api/rest/course/**").hasRole("ADMIN")
                         .pathMatchers("/api/rest/author/**").hasRole("ADMIN")
-                        .pathMatchers("/api/rest/order/**").authenticated()
-                        .pathMatchers("/api/rest/payment/**").authenticated())
+                        .pathMatchers("/api/rest/order/**").hasRole("USER")
+                        .pathMatchers("/api/rest/payment/**").hasRole("USER"))
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                         .jwt(jwtSpec -> jwtSpec.jwtAuthenticationConverter(grantedAuthoritiesExtractor())));
         serverHttpSecurity.csrf(csrfSpec -> csrfSpec.disable());

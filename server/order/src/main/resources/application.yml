@@ -24,6 +24,10 @@ spring:
     bootstrap-servers: ${BOOTSTRAP_SERVERS_KAFKA:localhost:9094}
     consumer:
       group-id: ${GROUP_ID_KAFKA:order-group-id}
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
 management:
   endpoints:
     web:

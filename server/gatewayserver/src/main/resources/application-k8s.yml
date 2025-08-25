@@ -1,0 +1,32 @@
+spring:
+  cloud:
+    kubernetes:
+      discovery:
+        enabled: true
+        all-namespaces: true
+    discovery:
+      client:
+        health-indicator:
+          enabled: false
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+    gateway:
+      routes:
+        - id: catalog
+          uri: lb://catalog
+          predicates:
+            - Path=/api/**
+        - id: order
+          uri: lb://order
+          predicates:
+            - Path=/api/**
+        - id: payment
+          uri: lb://payment
+          predicates:
+            - Path=/api/**
+        - id: message
+          uri: lb://message
+          predicates:
+            - Path=/api/**

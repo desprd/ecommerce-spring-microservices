@@ -19,6 +19,10 @@ spring:
           starttls:
             enable: true
             required: true
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
 management:
   endpoints:
     web:

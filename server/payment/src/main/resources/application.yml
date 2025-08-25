@@ -11,6 +11,10 @@ spring:
           negotiationType: ${ORDER_GRPC_NEGOTIATION:PLAINTEXT}
   kafka:
     bootstrap-servers: ${BOOTSTRAP_SERVERS_KAFKA:localhost:9094}
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
 management:
   endpoints:
     web:
