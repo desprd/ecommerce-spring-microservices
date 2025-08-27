@@ -24,7 +24,7 @@ orderGrpc:
   enabled: false
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 8072
   targetPort: 8072
 

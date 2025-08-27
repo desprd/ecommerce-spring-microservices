@@ -11,7 +11,10 @@ image:
 containerPort: 8090
 
 profile:
-  enabled: false
+  enabled: true
+  active: k8s
+  kubernetes:
+    url: http://spring-cloud-kubernetes-discoveryserver:80
 
 grpc:
   enabled: true
