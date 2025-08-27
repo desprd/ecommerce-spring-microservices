@@ -4,7 +4,7 @@ spring:
       discovery:
         enabled: true
         all-namespaces: true
-        discovery-server-url: http://spring-cloud-kubernetes-discoveryserver:80
+        discovery-server-url: ${DISCOVERY_SERVER_URL:http://spring-cloud-kubernetes-discoveryserver:80}
     discovery:
       client:
         health-indicator:

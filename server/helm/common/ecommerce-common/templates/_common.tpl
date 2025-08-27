@@ -29,8 +29,10 @@ spec:
 
             # === Profile ===
             {{- if .Values.profile.enabled }}
-            - name: SPRING_PROFILE_ACTIVE
+            - name: SPRING_PROFILES_ACTIVE
               value: {{ .Values.profile.active | quote }}
+            - name: DISCOVERY_SERVER_URL
+              value: {{ .Values.profile.kubernetes.url | quote }}
             {{- end }}
 
             # === PostgreSQL ===

@@ -1,64 +1,67 @@
-deploymentName: catalog
-serviceName: catalog
-appLabel: catalog
-appName: catalog
+  deploymentName: catalog
+  serviceName: catalog
+  appLabel: catalog
+  appName: catalog
 
-replicaCount: 1
-image:
-  repository: docker.io/ilya95k/catalog
-  tag: s1
+  replicaCount: 1
+  image:
+    repository: docker.io/ilya95k/catalog
+    tag: s1
 
-containerPort: 8080
+  containerPort: 8080
 
-profile:
-  enabled: false
-
-grpc:
-  enabled: true
-  port: 9090
-catalogGrpc:
-  enabled: false
-orderGrpc:
-  enabled: false
-
-service:
-  type: ClusterIP
-  port: 8080
-  targetPort: 8080
-
-
-postgres:
-  enabled: true
-  host: catalogdb-postgresql
-  port: "5432"
-  database: catalogdb
-  username: admin
-  passwordSecret:
-    name: catalogdb-postgresql
-    key:  password
-
-kafka:
-  enabled: false
-kafkaClient:
-  enabled: false
-
-redis:
-  enabled: true
-  host: catalogcache-redis-master
-  port: 6379
-  passwordSecret:
-    name: catalogcache-redis
-    key: redis-password
-
-email:
-  enabled: false
-
-oauth2:
-  enabled: false
-
-probes:
-  grpc:
-    enabled: false
-  http:
+  profile:
     enabled: true
-    path: /actuator/health
+    active: k8s
+    kubernetes:
+      url: http://spring-cloud-kubernetes-discoveryserver:80
+
+  grpc:
+    enabled: true
+    port: 9090
+  catalogGrpc:
+    enabled: false
+  orderGrpc:
+    enabled: false
+
+  service:
+    type: ClusterIP
+    port: 8080
+    targetPort: 8080
+
+
+  postgres:
+    enabled: true
+    host: catalogdb-postgresql
+    port: "5432"
+    database: catalogdb
+    username: admin
+    passwordSecret:
+      name: catalogdb-postgresql
+      key:  password
+
+  kafka:
+    enabled: false
+  kafkaClient:
+    enabled: false
+
+  redis:
+    enabled: true
+    host: catalogcache-redis-master
+    port: 6379
+    passwordSecret:
+      name: catalogcache-redis
+      key: redis-password
+
+  email:
+    enabled: false
+
+  oauth2:
+    enabled: false
+
+  probes:
+    grpc:
+      enabled: false
+    http:
+      enabled: true
+      path: /actuator/health
