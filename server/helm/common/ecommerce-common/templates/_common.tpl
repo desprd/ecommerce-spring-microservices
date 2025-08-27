@@ -55,8 +55,8 @@ spec:
             - name: SPRING_DATA_REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.postgres.passwordSecret.name }}
-                  key: {{ .Values.postgres.passwordSecret.key }}
+                  name: {{ .Values.redis.passwordSecret.name }}
+                  key: {{ .Values.redis.passwordSecret.key }}
             {{- end }}
 
             # === gRPC ===

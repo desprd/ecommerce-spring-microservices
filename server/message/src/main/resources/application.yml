@@ -24,6 +24,9 @@ spring:
       discovery:
         all-namespaces: true
 management:
+  health:
+    mail:
+      enabled: false
   endpoints:
     web:
       exposure:

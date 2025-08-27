@@ -1,0 +1,59 @@
+deploymentName: gatewayserver
+serviceName: gatewayserver
+appLabel: gatewayserver
+appName: gatewayserver
+
+replicaCount: 1
+image:
+  repository: docker.io/ilya95k/gatewayserver
+  tag: s1
+
+containerPort: 8072
+
+profile:
+  enabled: true
+  active: k8s
+
+grpc:
+  enabled: false
+catalogGrpc:
+  enabled: false
+orderGrpc:
+  enabled: false
+
+service:
+  type: ClusterIP
+  port: 8072
+  targetPort: 8072
+
+
+postgres:
+  enabled: false
+
+
+redis:
+  enabled: true
+  host: catalogcache-redis-master
+  port: 6379
+  passwordSecret:
+    name: catalogcache-redis
+    key: redis-password
+
+kafka:
+  enabled: false
+kafkaClient:
+  enabled: false
+
+email:
+  enabled: false
+
+oauth2:
+  enabled: true
+  uri: http://keycloak.default.svc.cluster.local:80/realms/master/protocol/openid-connect/certs
+
+probes:
+  grpc:
+    enabled: false
+  http:
+    enabled: true
+    path: /actuator/health
